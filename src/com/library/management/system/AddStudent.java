@@ -93,7 +93,7 @@ public class AddStudent extends JFrame implements ActionListener{
         contentPane.add(comboBox);
 
         comboBox_1 = new JComboBox<String>();
-        comboBox_1.setModel(new DefaultComboBoxModel<>(new String[] { "1", "2", "3", "3" }));
+        comboBox_1.setModel(new DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
         comboBox_1.setForeground(new Color(47, 79, 79));
         comboBox_1.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
         comboBox_1.setBounds(176, 244, 154, 20);
