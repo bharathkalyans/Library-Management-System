@@ -106,6 +106,7 @@ public class ReturnBook extends JFrame implements ActionListener{
         b1.setBounds(443, 52, 105, 29);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
+        b1.setFocusable(false);
         contentPane.add(b1);
 
         textField3 = new JTextField();
@@ -160,7 +161,7 @@ public class ReturnBook extends JFrame implements ActionListener{
         b2.setBounds(369, 179, 149, 30);
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
-
+        b2.setFocusable(false);
         contentPane.add(b2);
 
         b3 = new JButton("Back");
@@ -170,6 +171,7 @@ public class ReturnBook extends JFrame implements ActionListener{
         b3.setBounds(369, 231, 149, 30);
         b3.setBackground(Color.BLACK);
         b3.setForeground(Color.WHITE);
+        b3.setFocusable(false);
         contentPane.add(b3);
 
         JPanel panel = new JPanel();
@@ -190,7 +192,7 @@ public class ReturnBook extends JFrame implements ActionListener{
             if (i > 0)
                 JOptionPane.showMessageDialog(null, "Book Returned");
             else
-                JOptionPane.showMessageDialog(null, "ERROR in Deleting");
+                JOptionPane.showMessageDialog(null, "ERROR");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
             e.printStackTrace();
@@ -235,6 +237,7 @@ public class ReturnBook extends JFrame implements ActionListener{
                 if (i > 0) {
                     Thread.sleep(2000);
                     JOptionPane.showMessageDialog(null, "Processing.....");
+                    Thread.sleep(1000);
                     delete();
                 } else
                     JOptionPane.showMessageDialog(null, "ERROR");
