@@ -10,22 +10,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class BookDetails extends JFrame implements ActionListener{
 
-    private JPanel contentPane;
-    private JTable table;
-    private JTextField search;
-    private JButton b1,b2;
+    private final JTable table;
+    private final JTextField search;
+    private final JButton b1;
+//    private final JButton b2;
 
     public BookDetails() {
 
         setBounds(300  , 150, 890, 475);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -67,6 +68,7 @@ public class BookDetails extends JFrame implements ActionListener{
         b1.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
         b1.setBounds(564, 89, 138, 33);
         contentPane.add(b1);
+/*
 
         b2 = new JButton("Delete");
         b2.addActionListener(this);
@@ -79,6 +81,7 @@ public class BookDetails extends JFrame implements ActionListener{
         b2.setBorder(new LineBorder(new Color(255, 20, 147), 2, true));
         b2.setBounds(712, 89, 138, 33);
         contentPane.add(b2);
+*/
 
 
         JLabel l1 = new JLabel("Book Details");
@@ -129,8 +132,12 @@ public class BookDetails extends JFrame implements ActionListener{
     public void Book() {
         try {
             Conn con = new Conn();
-            String sql = "select * from books";
-            PreparedStatement st = con.c.prepareStatement(sql);
+
+        /*    String sql = "select * from books";
+            PreparedStatement st = con.c.prepareStatement(sql);*/
+            String sql="{CALL GETBOOKS()}";
+            CallableStatement st=con.c.prepareCall(sql);
+
             ResultSet rs = st.executeQuery();
 
             table.setModel(DbUtils.resultSetToTableModel(rs));
@@ -138,7 +145,7 @@ public class BookDetails extends JFrame implements ActionListener{
             st.close();
             con.c.close();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -157,26 +164,27 @@ public class BookDetails extends JFrame implements ActionListener{
                 st.close();
 
             }
-           /* if(ae.getSource() == b3){
-                System.out.println("Cooler");
-            }*/
-            if(ae.getSource() == b2){
 
-                String sql = "delete from books where name = '" + search.getText() + "'";
-                PreparedStatement st = con.c.prepareStatement(sql);
+           /* if(ae.getSource() == b2){
+
+              *//*  String sql = "delete from books where name = '" + search.getText() + "'";
+                PreparedStatement st = con.c.prepareStatement(sql);*//*
+                String sql="{CALL DELETEBOOK(?)}";
+                CallableStatement st=con.c.prepareCall(sql);
+                st.setString(1,search.getText());
 
                 JDialog.setDefaultLookAndFeelDecorated(true);
                 int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                  if (response == JOptionPane.YES_OPTION) {
-                    int rs = st.executeUpdate();
+                     st.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Deleted !!");
                 }
                 st.close();
-            }
+            }*/
             con.c.close();
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
