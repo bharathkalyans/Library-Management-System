@@ -11,22 +11,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class StudentDetails extends JFrame implements ActionListener{
 
-    private JPanel contentPane;
-    private JTable table;
-    private JTextField search;
-    private JButton b1,b2;
+    private final JTable table;
+    private final JTextField search;
+    private final JButton b1;
+    private final JButton b2;
 
     public StudentDetails() {
 
         setBounds(300  , 150, 890, 475);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -122,16 +123,21 @@ public class StudentDetails extends JFrame implements ActionListener{
     public void Students() {
         try {
             Conn con = new Conn();
-            String sql = "select * from student";
+
+            /*String sql = "select * from student";
             PreparedStatement st = con.c.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            ResultSet rs = st.executeQuery();*/
+
+            String sql="{CALL GETSTUDENTS()}";
+            CallableStatement cst=con.c.prepareCall(sql);
+            ResultSet rs=cst.executeQuery();
 
             table.setModel(DbUtils.resultSetToTableModel(rs));
             rs.close();
-            st.close();
+            cst.close();
             con.c.close();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -162,14 +168,14 @@ public class StudentDetails extends JFrame implements ActionListener{
                 int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.YES_OPTION) {
-                    int rs = st.executeUpdate();
+                    /*int rs = st.executeUpdate();*/
                     JOptionPane.showMessageDialog(null, "Deleted !!");
                 }
                 st.close();
             }
             con.c.close();
         }catch(Exception e){
-            System.out.println(e);
+           e.printStackTrace();
         }
     }
     public static void main(String[] args) { new StudentDetails().setVisible(true); }
