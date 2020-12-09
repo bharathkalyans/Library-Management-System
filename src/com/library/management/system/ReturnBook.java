@@ -204,10 +204,12 @@ public class ReturnBook extends JFrame implements ActionListener{
         try{
             Conn con = new Conn();
             if(ae.getSource() == b1){
+
                 String sql = "select * from issueBook where student_id = ? and book_id =?";
                 PreparedStatement st = con.c.prepareStatement(sql);
                 st.setString(1, textField2.getText());
                 st.setString(2, textField1.getText());
+
                 ResultSet rs = st.executeQuery();
 
                 while (rs.next()) {
@@ -257,7 +259,7 @@ public class ReturnBook extends JFrame implements ActionListener{
 
             }
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
