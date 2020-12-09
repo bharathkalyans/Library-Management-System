@@ -1,16 +1,25 @@
 package com.library.management.system;
 
-import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import java.sql.*;
-import java.awt.event.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Forgot extends JFrame implements ActionListener{
 
-    private JPanel contentPane;
-    private JTextField t1,t2,t3,t4,t5;
-    private JButton b1,b2,b3;
+    private final JTextField t1;
+    private final JTextField t2;
+    private final JTextField t3;
+    private final JTextField t4;
+    private final JTextField t5;
+    private final JButton b1;
+    private final JButton b2;
+    private final JButton b3;
 
 
     public Forgot() {
@@ -18,7 +27,7 @@ public class Forgot extends JFrame implements ActionListener{
         setBounds(360, 150, 620, 440);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setBackground(Color.WHITE);
@@ -125,9 +134,6 @@ public class Forgot extends JFrame implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent ae){
-        /**
-         * Note use Stored Procedures HERE!!!!!!!!!*
-         * */
         try{
             Conn con = new Conn();
             if(ae.getSource() == b1){

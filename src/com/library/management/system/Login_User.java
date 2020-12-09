@@ -2,17 +2,18 @@ package com.library.management.system;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import  java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Login_User extends JFrame implements ActionListener {
 
-    private JPanel panel;
-    private JTextField textField;
-    private JPasswordField passwordField;
-    private JButton b1,b2,b3;
+    private final JTextField textField;
+    private final JPasswordField passwordField;
+    private final JButton b1;
+    private final JButton b2;
+    private final JButton b3;
 
     public  Login_User(){
 
@@ -24,7 +25,7 @@ public class Login_User extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setBackground(new Color(176, 224, 230));
         setContentPane(panel);
         panel.setLayout(null);
@@ -43,6 +44,7 @@ public class Login_User extends JFrame implements ActionListener {
 
         passwordField = new JPasswordField();
         passwordField.setBounds(210, 128, 157, 20);
+        passwordField.setEchoChar('*');
         panel.add(passwordField);
 
 
@@ -86,7 +88,6 @@ public class Login_User extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
 
         if(ae.getSource() == b1){
-            Boolean status = false;
             try {
                 Conn con = new Conn();
 
