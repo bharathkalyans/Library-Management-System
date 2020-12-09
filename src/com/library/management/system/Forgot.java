@@ -87,6 +87,7 @@ public class Forgot extends JFrame implements ActionListener{
         t4.setForeground(new Color(205, 92, 92));
         t4.setColumns(10);
         t4.setBounds(277, 193, 139, 20);
+        t4.setEditable(false);
         contentPane.add(t4);
 
         t5 = new JTextField();
@@ -113,6 +114,7 @@ public class Forgot extends JFrame implements ActionListener{
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
         b2.setFocusable(false);
+        b2.setEnabled(false);
         contentPane.add(b2);
 
         b3 = new JButton("Back");
@@ -151,15 +153,18 @@ public class Forgot extends JFrame implements ActionListener{
                 while (rs.next()) {
                     t2.setText(rs.getString("name"));
                     t3.setText(rs.getString("sec_q"));
+                    b2.setEnabled(true);
+                    t4.setEditable(true);
                 }
 
             }
             if(ae.getSource() == b2){
 
-                String sql = "select * from account where sec_ans=?";
+                String sql = "select * from account where sec_ans=? and username=?";
                 PreparedStatement st = con.c.prepareStatement(sql);
 
                 st.setString(1, t4.getText());
+                st.setString(2,t1.getText());
                 ResultSet rs = st.executeQuery();
 
                 while (rs.next()) {
