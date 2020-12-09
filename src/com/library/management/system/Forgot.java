@@ -7,6 +7,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -137,10 +138,14 @@ public class Forgot extends JFrame implements ActionListener{
         try{
             Conn con = new Conn();
             if(ae.getSource() == b1){
-                String sql = "select * from account where username=?";
-                PreparedStatement st = con.c.prepareStatement(sql);
 
-                st.setString(1, t1.getText());
+               /* String sql = "select * from account where username=?";
+                PreparedStatement st = con.c.prepareStatement(sql);
+                st.setString(1, t1.getText());*/
+
+                String sql="{CALL GETACCOUNT(?)}";
+                CallableStatement st=con.c.prepareCall(sql);
+                st.setString(1,t1.getText());
                 ResultSet rs = st.executeQuery();
 
                 while (rs.next()) {
@@ -169,7 +174,7 @@ public class Forgot extends JFrame implements ActionListener{
 
             }
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
