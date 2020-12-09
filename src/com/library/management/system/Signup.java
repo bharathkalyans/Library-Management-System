@@ -1,20 +1,23 @@
 package com.library.management.system;
 
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
-import javax.swing.border.*;
 
 public class Signup extends JFrame implements ActionListener{
 
-    private JPanel contentPane;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JButton b1, b2;
-    private JComboBox<String> comboBox;
+    private final JTextField textField1;
+    private final JTextField textField2;
+    private final JTextField textField3;
+    private final JTextField textField4;
+    private final JButton b1;
+    private final JButton b2;
+    private final JComboBox<String> comboBox;
 
     public Signup() {
 
@@ -23,7 +26,7 @@ public class Signup extends JFrame implements ActionListener{
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setBackground(Color.WHITE);
@@ -158,7 +161,7 @@ public class Signup extends JFrame implements ActionListener{
 
             }
         }catch(Exception e){
-            System.out.println(e);
+           e.printStackTrace();
         }
 
     }

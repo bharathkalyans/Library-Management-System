@@ -9,14 +9,13 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
 
 public class Statistics extends JFrame{
-    private JPanel contentPane;
-    private JTable table1;
-    private JTable table2;
+    private final JTable table1;
+    private final JTable table2;
 
     public static void main(String[] args) {
         new Statistics().setVisible(true);
@@ -25,9 +24,14 @@ public class Statistics extends JFrame{
     public void issueBook() {
         try {
             Conn con =  new Conn();
-            String sql = "select * from issueBook";
+          /*  String sql = "select * from issueBook";
             PreparedStatement st = con.c.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            ResultSet rs = st.executeQuery();*/
+
+            String sql="{CALL GETISSUEDBOOKS()}";
+            CallableStatement cst=con.c.prepareCall(sql);
+            ResultSet rs=cst.executeQuery();
+
 
             table1.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -39,9 +43,15 @@ public class Statistics extends JFrame{
     public void returnBook() {
         try {
             Conn con = new Conn();
-            String sql = "select * from returnBook";
+
+          /*  String sql = "select * from returnBook";
             PreparedStatement st = con.c.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            ResultSet rs = st.executeQuery();*/
+
+            String sql="{CALL GETRETURNEDBOOKS()}";
+            CallableStatement cst=con.c.prepareCall(sql);
+            ResultSet rs=cst.executeQuery();
+
             table2.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             /* TODO: handle exception */
@@ -53,7 +63,7 @@ public class Statistics extends JFrame{
         setBounds(400, 200, 810, 594);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
