@@ -156,19 +156,18 @@ public class StudentDetails extends JFrame implements ActionListener{
                 st.close();
 
             }
-           /* if(ae.getSource() == b3){
-                System.out.println("Cooler");
-            }*/
+
             if(ae.getSource() == b2){
 
-                String sql = "delete from student where name = '" + search.getText() + "'";
+                String sql = sql="delete from student where name = ?";
                 PreparedStatement st = con.c.prepareStatement(sql);
+                st.setString(1,search.getText());
 
                 JDialog.setDefaultLookAndFeelDecorated(true);
                 int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.YES_OPTION) {
-                    /*int rs = st.executeUpdate();*/
+                    st.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Deleted !!");
                 }
                 st.close();
