@@ -1,20 +1,24 @@
 package com.library.management.system;
 
-import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import java.awt.event.*;
-import java.sql.*;
-import java.util.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.util.Random;
 
 public class AddStudent extends JFrame implements ActionListener{
 
-    private JPanel contentPane;
-    private JTextField t1,t2,t3;
-    private JComboBox<String> comboBox;
-    private JComboBox<String> comboBox_1;
-    private JComboBox<String> comboBox_2;
-    private JComboBox<String> comboBox_3;
+    private final JTextField t1;
+    private final JTextField t2;
+    private final JTextField t3;
+    private final JComboBox<String> comboBox;
+    private final JComboBox<String> comboBox_1;
+    private final JComboBox<String> comboBox_2;
+    private final JComboBox<String> comboBox_3;
     JButton b1,b2;
 
     public AddStudent() {
@@ -22,7 +26,7 @@ public class AddStudent extends JFrame implements ActionListener{
         super("Add Student");
         setBounds(300, 150, 550, 450);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -92,7 +96,7 @@ public class AddStudent extends JFrame implements ActionListener{
         comboBox.setBounds(176, 211, 154, 20);
         contentPane.add(comboBox);
 
-        comboBox_1 = new JComboBox<String>();
+        comboBox_1 = new JComboBox<>();
         comboBox_1.setModel(new DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
         comboBox_1.setForeground(new Color(47, 79, 79));
         comboBox_1.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
@@ -186,7 +190,7 @@ public class AddStudent extends JFrame implements ActionListener{
                 new Home().setVisible(true);
             }
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
