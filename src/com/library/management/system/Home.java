@@ -222,10 +222,7 @@ public class Home extends JFrame implements ActionListener {
             case "Exit":
                 System.exit(ABORT);
 
-            case "Read Me":
-                setVisible(false);
-                new readME().setVisible(true);
-                break;
+            
             case "About Us":
                 setVisible(false);
                 new aboutUs().setVisible(true);
