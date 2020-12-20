@@ -72,7 +72,7 @@ public class StudentDetails extends JFrame implements ActionListener{
         b2.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
         b2.setBorder(new LineBorder(new Color(255, 20, 147), 2, true));
         b2.setBounds(712, 89, 138, 33);
-        contentPane.add(b2);
+//        contentPane.add(b2);
 
 
         JLabel l1 = new JLabel("Student Details");
