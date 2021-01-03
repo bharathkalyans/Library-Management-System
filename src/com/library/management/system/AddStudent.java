@@ -181,7 +181,7 @@ public class AddStudent extends JFrame implements ActionListener{
                     else
                         JOptionPane.showMessageDialog(null, "Error,couldn't Add : (");
                 }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Error,couldn't Add : (");
+                    JOptionPane.showMessageDialog(null, "Please Fill All Details!");
                 }
             }
 
