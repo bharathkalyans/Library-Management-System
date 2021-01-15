@@ -1,0 +1,78 @@
+Account Table::
+
+CREATE TABLE `account` (
+  `username` varchar(20) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `password` varchar(25) NOT NULL,
+  `sec_q` varchar(25) NOT NULL,
+  `sec_ans` varchar(25) NOT NULL,
+  PRIMARY KEY (`username`);
+
+Books Table::
+
+ CREATE TABLE `books` (
+  `book_id` varchar(10) NOT NULL,
+  `name` varchar(40) DEFAULT NULL,
+  `isbn` varchar(20) DEFAULT NULL,
+  `publisher` varchar(30) DEFAULT NULL,
+  `edition` varchar(10) DEFAULT NULL,
+  `price` varchar(10) DEFAULT NULL,
+  `pages` varchar(10) DEFAULT NULL,
+  `no_of_copies` int(11) DEFAULT NULL,
+  PRIMARY KEY (`book_id`);
+
+Student Table::
+
+ CREATE TABLE `student` (
+  `student_id` varchar(10) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `father` varchar(25) NOT NULL,
+  `course` varchar(10) DEFAULT NULL,
+  `branch` varchar(10) DEFAULT NULL,
+  `year` varchar(10) DEFAULT NULL,
+  `semester` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`student_id`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`name` <> ''),
+  CONSTRAINT `CONSTRAINT_2` CHECK (`father` <> '')
+);
+
+IssueBook Table::
+
+ CREATE TABLE `issuebook` (
+  `book_id` varchar(10) DEFAULT NULL,
+  `student_id` varchar(10) DEFAULT NULL,
+  `bname` varchar(40) DEFAULT NULL,
+  `sname` varchar(40) DEFAULT NULL,
+  `course` varchar(20) DEFAULT NULL,
+  `branch` varchar(10) DEFAULT NULL,
+  `dateOfIssue` varchar(20) DEFAULT NULL,
+  KEY `book_id` (`book_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `issuebook_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`) ON DELETE CASCADE,
+  CONSTRAINT `issuebook_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE
+);
+
+
+ReturnBook Table::
+
+ CREATE TABLE `returnbook` (
+  `book_id` varchar(10) DEFAULT NULL,
+  `student_id` varchar(10) DEFAULT NULL,
+  `bname` varchar(40) DEFAULT NULL,
+  `sname` varchar(40) DEFAULT NULL,
+  `course` varchar(20) DEFAULT NULL,
+  `branch` varchar(10) DEFAULT NULL,
+  `dateofissue` varchar(20) DEFAULT NULL,
+  `dateofreturn` varchar(20) DEFAULT NULL,
+  KEY `book_id` (`book_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `returnbook_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`) ON DELETE CASCADE,
+  CONSTRAINT `returnbook_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE
+);
+
+
+
+
+
+
+
