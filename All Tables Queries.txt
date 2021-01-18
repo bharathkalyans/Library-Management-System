@@ -6,7 +6,7 @@ CREATE TABLE `account` (
   `password` varchar(25) NOT NULL,
   `sec_q` varchar(25) NOT NULL,
   `sec_ans` varchar(25) NOT NULL,
-  PRIMARY KEY (`username`);
+  PRIMARY KEY (`username`));
 
 Books Table::
 
